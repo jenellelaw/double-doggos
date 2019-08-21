@@ -12,17 +12,26 @@
 
 <body>
   <header>
-    <h1>Double Doggos</h1>
-    <p>Flip the cards to find each matching dog breed!</p>
+    <div class="wrapper">
+      <h1>Double <span class="spacing-fix">Doggos</span></h1>
+      <p>Flip the cards to find each matching dog breed!</p>
+    </div>
   </header>
 
-  <main role="main">
-    <ul class="wrapper">
-      <li></li>
-    </ul>
+  <main>
+    <div class="wrapper">
+      <ol class="game-grid" id="gameGrid">
+      </ol>
+    </div>
   </main>
 
-
+  <footer>
+    <div class="wrapper">
+      <p>Illustration credits to <a
+          href="https://www.gettyimages.ca/search/photographer?family=creative&photographer=hakule">hakule</a> from <a
+          href="https://www.gettyimages.com">Getty Images</a></p>
+    </div>
+  </footer>
 
   <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
   <script src="/scripts/game.js"></script>

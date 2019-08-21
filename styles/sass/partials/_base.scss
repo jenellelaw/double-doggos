@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css?family=Rubik+Mono+One|Rubik:400,500&display=swap');
+
+$background: #F2F2F2;
+$charcoal-brown: #302826;
+$grey: #D3D3D3;
+$orange: #DC5712;
+
+// MIXINS
+
+@mixin wrapper($max-width, $width, $margin: 0 auto) {
+  max-width: $max-width;
+  width: $width;
+  margin: $margin;
+}
+
+// STYLES START HERE
+
+body {
+  background: $background;
+}
+
+.wrapper {
+  @include wrapper(1080px, 80%);
+}
+
+header {
+  margin-top: 3%;
+  border: 1px solid red;
+  text-align: center;
+
+  h1 {
+    font-family: 'Rubik Mono One', sans-serif;
+    text-transform: uppercase;
+    font-size: 5.1rem;
+    color: $charcoal-brown;
+    margin-left: 2rem;
+
+    .spacingFix {
+      margin-left: -2rem;
+    }
+  }
+
+  p {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 500;
+    font-size: 1.8rem;
+    color: $orange;
+  }
+}
+
+// MAIN STARTS HERE
+
+main {
+  margin: 4% 0;
+}
+
+.gameGrid {
+  width: 500px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+}
+
+.card {
+  position: relative;
+  flex: 1 calc(25% - 15px);
+  border-radius: 16%;
+  overflow: hidden;
+
+
+  img {
+    display: block;
+    width: 100%;
+  }
+
+  margin-right: 15px;
+  margin-bottom: 15px;
+}
+
+li:focus {
+  border: 3px solid red;
+}
+
+// .cardFront {
+//   position: absolute;
+//   width: 100%;
+//   height: 100%;
+//   top: 0;
+//   left: 0;
+// }
+
+// .cardBack {
+//   position: absolute;
+//   width: 100%;
+//   height: 100%;
+//   top: 0;
+//   left: 0;
+//   background: $grey;
+//   // display: none;
+// }
+
+// .card {
+//   flex: 0 1 25%;
+
+//   &:not(:nth-child(4n)) {
+//     margin-right: 10px;
+//     margin-bottom: 10px;
+//   }
+// }
+
+// FOOTER STARTS HERE
+
+footer {
+  border: 1px solid red;
+  margin-bottom: 3%;
+
+  .wrapper {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  p {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 500;
+    font-size: 1.6rem;
+    color: $orange;
+  }
+}
+
