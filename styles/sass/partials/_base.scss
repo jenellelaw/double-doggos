@@ -1,20 +1,3 @@
-@import url('https://fonts.googleapis.com/css?family=Rubik+Mono+One|Rubik:400,500&display=swap');
-
-$background: #F2F2F2;
-$charcoal-brown: #302826;
-$grey: #D3D3D3;
-$orange: #DC5712;
-
-// MIXINS
-
-@mixin wrapper($max-width, $width, $margin: 0 auto) {
-  max-width: $max-width;
-  width: $width;
-  margin: $margin;
-}
-
-// STYLES START HERE
-
 body {
   background: $background;
 }
@@ -59,54 +42,50 @@ main {
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
+  position: relative;
 }
 
 .card {
+  width: calc(25% - 10px);
+  height: calc(33.333% - 10px);
+  margin: 5px;
   position: relative;
-  flex: 1 calc(25% - 15px);
-  border-radius: 16%;
-  overflow: hidden;
+  transform: scale(1);
+  transform-style: preserve-3d;
+  transition: transform .5s;
+  width: 100px;
+  height: 100px;
+}
 
+.card:active {
+  transform: scale(0.97);
+  transition: transform .2s;
+}
 
+.card.flip {
+  transform: rotateY(180deg);
+}
+
+.cardFront,
+.cardBack {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  // backface-visibility: hidden;
+}
+
+.cardFront {
+  transform: rotateY(180deg);
   img {
     display: block;
     width: 100%;
   }
-
-  margin-right: 15px;
-  margin-bottom: 15px;
 }
 
-li:focus {
-  border: 3px solid red;
+.cardBack {
+  background: black;
+  opacity: 0.8;
 }
-
-// .cardFront {
-//   position: absolute;
-//   width: 100%;
-//   height: 100%;
-//   top: 0;
-//   left: 0;
-// }
-
-// .cardBack {
-//   position: absolute;
-//   width: 100%;
-//   height: 100%;
-//   top: 0;
-//   left: 0;
-//   background: $grey;
-//   // display: none;
-// }
-
-// .card {
-//   flex: 0 1 25%;
-
-//   &:not(:nth-child(4n)) {
-//     margin-right: 10px;
-//     margin-bottom: 10px;
-//   }
-// }
 
 // FOOTER STARTS HERE
 

@@ -1,0 +1,12 @@
+$background: #F2F2F2;
+$charcoal-brown: #302826;
+$grey: #D3D3D3;
+$orange: #DC5712;
+
+// MIXINS
+
+@mixin wrapper($max-width, $width, $margin: 0 auto) {
+  max-width: $max-width;
+  width: $width;
+  margin: $margin;
+}
