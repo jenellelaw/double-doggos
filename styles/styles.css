@@ -257,8 +257,8 @@ main {
   height: calc(33.333% - 10px);
   margin: 5px;
   position: relative;
-  -webkit-transform: scale(1);
-          transform: scale(1);
+  -webkit-transform: rotateY(0deg) scale(1);
+          transform: rotateY(0deg) scale(1);
   -webkit-transform-style: preserve-3d;
           transform-style: preserve-3d;
   -webkit-transition: -webkit-transform .5s;
@@ -267,6 +267,10 @@ main {
   transition: transform .5s, -webkit-transform .5s;
   width: 100px;
   height: 100px;
+}
+
+.card:focus {
+  border: 1px solid red;
 }
 
 .card:active {
@@ -281,7 +285,6 @@ main {
 .card.flip {
   -webkit-transform: rotateY(180deg);
           transform: rotateY(180deg);
-  border: 3px solid red;
 }
 
 .cardFront,
@@ -297,11 +300,13 @@ main {
 }
 
 .cardFront img {
-  display: block;
   width: 100%;
+  display: block;
+  border-radius: 16%;
 }
 
 .cardBack {
+  border-radius: 16%;
   background: black;
   opacity: 0.8;
 }
