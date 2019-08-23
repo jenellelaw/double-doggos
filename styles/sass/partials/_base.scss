@@ -64,6 +64,7 @@ main {
 
 .card.flip {
   transform: rotateY(180deg);
+  border: 3px solid red;
 }
 
 .cardFront,
