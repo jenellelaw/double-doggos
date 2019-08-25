@@ -1,6 +1,6 @@
 game = {
-  // PROPERTIES
   dogs: ['corgi', 'beagle', 'frenchie', 'schnauzer', 'retriever', 'samoyed', 'poodle', 'rottweiler'],
+  dogsLeftToMatch: [],
   card1: '',
   card2: '',
   matchedBreed: '',
@@ -9,13 +9,15 @@ game = {
     corgi: [
       `Corgi means dwarf dog in welsh and were originally used as herders`,
       `A Pembroke Welsh Corgi named Rufus was the mascot for Amazon.`
+
+      // `A Pembroke Welsh Corgi named Rufus was the mascot for Amazon. <span>In the early days of Amazon.com, a Pembroke named Rufus belonged to the principal engineer and came with them to work every day. Known for walking the halls, attending meetings, and snoozing, Rufus became the unofficial Amazon mascot.</span>`
     ],
     beagle: [
       `Beagle means "Loudmouth" in French, as they are known for being very vocal, with barking, baying and howling.`,
       `The "Peanuts" character Snoopy is arguably the most famous fictitious Beagle.<span> Snoopy was silent for the first few years of the comic strip, but later was given an active imagination and inner monologue.</span>`
     ],
     frenchie: [
-      `Frenchies can't swim due to their smushed faces, thick neck structures and short bodies. <span>They need to give a lot of forces just to keep their heads above the water.</span>`,
+      `Frenchies can't swim due to their smushed faces, thick neck structures and short bodies. <span>They need to use great amounts of energy just to keep their heads above the water.</span>`,
       `Frenchies aren’t not great on planes because their smushy face makes them prone to breathing problems which could their airways to collapse.`
     ],
     schnauzer: [
@@ -40,11 +42,27 @@ game = {
       `Rottweilers have a bite force of 328 pounds, which is about half of a shark’s bite force, at 669 pounds.`
     ]
   },
-  // METHODS
-  renderCards() {
-    const doubleDogs = [...game.dogs].concat([...game.dogs]);
 
-    this.shuffleArray(doubleDogs)
+  // METHODS START HERE
+
+  renderGame() {
+    $('#gameArea').removeClass('fadeOutEl');
+    // Setting up winning message
+    const winningMessageContainer = `<div class="winningMessageContainer" id="winningMessageContainer">
+    <div class="winningMessage" id="winningMessage">
+    <p>Congrats!</p>
+    <p>You've matched all the doggos!</p>
+    <button class="playAgain" id="playAgain">Play again</button>
+    </div>
+    <div class="winningCardOverlay" id="winningCardOverlay"></div>
+    </div>`;
+
+    $('#gameGrid').append(winningMessageContainer);
+
+    // Setting up dog cards
+    game.dogsLeftToMatch = [...game.dogs];
+    const doubleDogs = [...game.dogs].concat([...game.dogs]);
+    this.shuffleArray(doubleDogs);
 
     doubleDogs.forEach((dog) => {
       const capitalizedDogBreed = `${dog.charAt(0).toUpperCase()}${dog.substring(1)}`;
@@ -57,7 +75,6 @@ game = {
       </li>`;
 
       $('#gameGrid').append(cardHTML);
-
     });
 
     $('#attemptCount').text(`Attempts: ${game.attemptedGuesses}`);
@@ -97,28 +114,40 @@ game = {
       game.removeMatchedBreedFromList();
       game.showMatchedBreedFact();
       game.clearSavedCardsData();
-      game.unlockGameBoard(); return
-    } else {
-      setTimeout(function () {
-        game.card1.removeClass('flip');
-        game.card2.removeClass('flip');
-        game.clearSavedCardsData();
-        game.unlockGameBoard();
-
-        // setTimeout(function () {
-        // }, 400);
-
-      }, 1500); // let user look at not matching cards for 1500ms before removing the class
+      game.unlockGameBoard();
+      return
     }
+
+    setTimeout(function () {
+      game.card1.removeClass('flip');
+      game.card2.removeClass('flip');
+      game.clearSavedCardsData();
+      game.unlockGameBoard();;
+    }, 1500); // let user look at non-matching card pair for 1500ms
   },
   removeMatchedBreedFromList() {
     game.matchedBreed = game.card1.data('breed');
 
-    const breedIndex = game.dogs.indexOf(game.matchedBreed);
-    if (breedIndex > -1) { game.dogs.splice(breedIndex, 1); }
+    const breedIndex = game.dogsLeftToMatch.indexOf(game.matchedBreed);
+    if (breedIndex > -1) { game.dogsLeftToMatch.splice(breedIndex, 1); }
 
-    if (game.dogs.length === 0) {
-      alert('You win!');
+    console.log(game.dogsLeftToMatch);
+
+    if (game.dogsLeftToMatch.length === 0) {
+      $('#playAgain').click(function () {
+        $(this).addClass('pressDown');
+
+        setTimeout(() => {
+          $(this).removeClass('pressDown');
+          game.resetGame();
+        }, 300);
+      })
+
+      setTimeout(() => {
+        $('#winningMessageContainer').css('visibility', 'visible');
+        $('#winningCardOverlay').addClass('overlayFadeIn');
+        $('#winningMessage').addClass('bounceIn');
+      }, 2000);
     }
   },
   showMatchedBreedFact() {
@@ -135,37 +164,65 @@ game = {
     const factCard = $('<div class="factCard"></div>');
     factCard.append(factText, factImage);
 
-    if (game.dogs.length === (game.dogs.length - 1)) {
-      $('#introCard').fadeOut(200);
-      setTimeout(() => {
-        $('#factContainer').append(factCard);
-        // $('#factCard').addClass('fadeInAfter');
-      }, 200);
-    }
+    $('#factContainer').addClass('fadeOutEl');
 
-    $('#factContainer').html(factCard);
+    setTimeout(() => {
+      $('#factContainer').html('');
+      $('#factContainer').append(factCard);
+      $('#factContainer').removeClass('fadeOutEl');
+    }, 600)
   },
   clearSavedCardsData() {
     game.card1 = '';
     game.card2 = '';
   },
   lockGameBoard() {
-    // console.log('Game board LOCKED.')
     $('#gameGrid').off('click keypress');
   },
   unlockGameBoard() {
-    // console.log('Game board is UNLOCKED.');
     $('#gameGrid').on('click keypress', '.card', function (e) {
       game.saveCard($(this));
     });
   },
+  resetGame() {
+    game.renderGame();
+    game.card1 = '';
+    game.card2 = '';
+    game.matchedBreed = '';
+    game.attemptedGuesses = 0;
 
+    $('#gameArea').addClass('fadeOutEl');
+    // $('#gameGrid').addClass('fadeOutEl');
+    $('#gameGrid').html('');
+
+    $('#factContainer').addClass('fadeOutEl');
+
+    setTimeout(() => {
+      $('#factContainer').html('');
+      const introCard = `<div class="introCard" id="introCard"> <p class="instructions">Flip the cards to find each matching doggo and to reveal a fun fact!</p></div>`;
+      $('#factContainer').append(introCard);
+      $('#factContainer').removeClass('fadeOutEl');
+      game.renderGame();
+      game.unlockGameBoard();
+    }, 1000);
+
+  },
   // INIT METHOD
   init() {
-    game.renderCards();
+    game.renderGame();
     game.unlockGameBoard();
+
+    $('#playNow').click(() => {
+      $('#playNow').addClass('pressDown');
+      setTimeout(() => {
+        $('#playNow').removeClass('pressDown');
+        setTimeout(() => {
+          $('header').addClass('shift');
+        }, 500);
+      }, 300);
+    });
   }
-};
+}
 
 
 // DOCUMENT READY STARTS HERE
