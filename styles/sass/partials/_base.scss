@@ -1,10 +1,22 @@
 body {
   background: $background;
+  font-family: 'Campton', sans-serif;
+  font-size: 2.0rem;
+
+  @media (max-width: 650px) {
+    font-size: 1.8rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.6rem;
+  }
 }
 
 .wrapper {
-  @include wrapper(1080px, 80%);
+  @include wrapper(1280px, 90%);
 }
+
+// HOMEPAGE (HEADER) STARTS HERE
 
 header {
   margin-top: 3%;
@@ -12,7 +24,7 @@ header {
   text-align: center;
 
   h1 {
-    font-family: 'Rubik Mono One', sans-serif;
+    font-family: 'Rubik', sans-serif;
     text-transform: uppercase;
     font-size: 5.1rem;
     color: $charcoal-brown;
@@ -24,8 +36,6 @@ header {
   }
 
   p {
-    font-family: 'Rubik', sans-serif;
-    font-weight: 500;
     font-size: 1.8rem;
     color: $orange;
   }
@@ -34,81 +44,265 @@ header {
 // MAIN STARTS HERE
 
 main {
-  margin: 4% 0;
-}
-
-.gameGrid {
-  width: 500px;
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0 auto;
-  position: relative;
-}
-
-.card {
-  width: calc(25% - 10px);
-  height: calc(33.333% - 10px);
-  margin: 5px;
-  position: relative;
-  transform: rotateY(0deg) scale(1);
-  transform-style: preserve-3d;
-  transition: transform .5s;
-  width: 100px;
-  height: 100px;
-}
-
-.card:focus {
-  border: 1px solid red;
-}
-
-.card:active {
-  transform: scale(0.97);
-  transition: transform .2s;
-}
-
-.card.flip {
-  transform: rotateY(180deg);
-}
-
-.cardFront,
-.cardBack {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  // backface-visibility: hidden;
-}
-
-.cardFront {
-  transform: rotateY(180deg);
-  img {
-    width: 100%;
-    display: block;
-    border-radius: 16%;
-  }
-}
-
-.cardBack {
-  border-radius: 16%;
-  background: black;
-  opacity: 0.8;
-}
-
-// FOOTER STARTS HERE
-
-footer {
-  border: 1px solid red;
-  margin-bottom: 3%;
+  border: 3px solid green;
+  height: 100vh;
 
   .wrapper {
+    border: 3px solid orange;
+    height: 100%;
+    padding: 3rem 0;
     display: flex;
-    justify-content: flex-end;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
   }
 
-  p {
-    font-family: 'Rubik', sans-serif;
-    font-weight: 500;
-    font-size: 1.6rem;
-    color: $orange;
+  .factContainer {
+    flex: 0 1 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 5%;
+    text-align: center;
+    color: $charcoal-brown;
+
+    @media (max-width: 850px) {
+      flex: 0 0 100%;
+      min-height: 330px;
+      margin-right: 0%;
+      margin-bottom: 5%;
+    }
+    @media (max-width: 480px) {
+      flex: 0 0 100%;
+      min-height: auto;
+      height: 250px;
+    }
+
+    &.background {
+      background: darken($background, 5%);
+    }
+
+    .breedName {
+      font-family: 'Rubik', sans-serif;
+      font-size: calc(2rem + (48 - 20) * (100vw - 320px) / (1280 - 320));
+      color: $orange;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      @media (max-width: 380px) {
+        margin-bottom: 0.5rem;
+
+      }
+    }
+
+    .introCard {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    p.instructions {
+      font-size: 2.8rem;
+      max-width: 400px;
+      margin: 0 5%;
+      color: $orange;
+
+      @media (max-width: 480px) {
+        font-size: 2rem;
+      }
+    }
+
+    .factCard {
+      border-radius: 30px;
+      width: 100%;
+      height: 100%;
+      padding: 5%;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+
+      background: darken($background, 7%);
+      // opacity: 0;
+      // transition: opacity 0.5s;
+
+      // &.fadeInAfter {
+      //   opacity: 1;
+      // }
+
+      @media (max-width: 850px) {
+        padding: 3%;
+      }
+      @media (max-width: 650px) {
+        justify-content: center;
+      }
+    }
+
+    .factBreedInfo {
+      @media (max-width: 850px) {
+        flex: 0 0 45%;
+      }
+      @media (max-width: 650px) {
+        flex: 0 0 100%;
+        margin-bottom: 3%;
+      }
+      @media (max-width: 380px) {
+        span {
+          display: none;
+        }
+      }
+    }
+
+    .factImg {
+      flex-basis: 100%; 
+      @media (max-width: 850px) {
+        flex: 0 0 50%;
+        order: -1;
+      }
+      @media (max-width: 650px) {
+        flex: 0 0 100%;
+        margin: -3% auto 1%;
+        order: 0;
+      }
+      img {
+        margin: 0 auto;
+        max-width: 90%;
+        display: block;
+        @media (max-width: 850px) {
+          max-width: 100%;
+          margin-left: -5%;
+        }
+        @media (max-width: 650px) {
+          max-width: 60%;
+          margin: 0 auto;
+        }
+        @media (max-width: 480px) {
+          max-width: 60%;
+          margin: -0.5rem auto 0;
+        }
+      }
+    }
+  }
+
+  .gameArea {
+    flex: 0 0 50%;
+    @media (max-width: 850px) {
+      flex: 0 0 70%;
+    }
+    @media (max-width: 600px) {
+      flex: 0 0 90%;
+    }
+  }
+
+  .attemptCount {
+    text-align: right;
+    color: $red;
+    margin-bottom: 2rem;
+    @media (max-width: 600px) {
+      text-align: center;
+      font-size: 1.8rem;
+    }
+    
+  }
+
+  .gameGrid {
+    display: grid;
+    grid-template-rows: (repeat(4, 1fr));
+    grid-template-columns: (repeat(4, 1fr));
+    grid-gap: 2%;
+    height: 44.478vw;
+    max-height: 638px;
+    perspective: 600px;
+    @media (max-width: 850px) {
+      height: 60vw;
+    }
+    @media (max-width: 600px) {
+      height: 78.422vw;
+    }
+  }
+
+  .card {
+    border-radius: 16%;    
+    position: relative;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transform: scale(1);
+    // background: #727479;
+    background: $blue;
+    transition: transform 0.5s, background 0.3s;
+    
+    &:hover,
+    &:focus {
+      transform: scale(1.05);
+      // background: darken(#727479, 7%);
+      // background: $green;
+      background: darken($blue, 10%);
+    }
+
+    &:active {
+      transform: scale(0.9);
+    }
+
+    &.flip {
+      transform: rotateY(180deg);
+    }
+
+    &.corgi,
+    &.schnauzer {
+      .cardFront {
+        background-color: $blue;
+      }
+    }
+
+    &.poodle,
+    &.frenchie {
+      .cardFront {
+        background-color: $red;
+      }
+    }
+
+    &.beagle,
+    &.rottweiler {
+      .cardFront {
+        background-color: $green;
+      }
+    }
+
+    &.retriever,
+    &.samoyed {
+      .cardFront {
+        background-color: $purple;
+      }
+    }
+  }
+
+  .cardFront, 
+  .cardBack {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    // backface-visibility: hidden;
+
+    img {
+      width: 100%;
+      display: block;
+    }
+  }
+
+  .cardFront {
+    transform: rotateY(-180deg);
+    
+    border-radius: 16%;
+
+    img.swing {
+      animation: swing ease-in-out 0.5s infinite alternate;
+    }
+  }
+
+  .cardBack {
+    border-radius: 16%;
+    transform: rotateY(0);
   }
 }
-

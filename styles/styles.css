@@ -1,4 +1,10 @@
-@import url("https://fonts.googleapis.com/css?family=Rubik+Mono+One|Rubik:400,500&display=swap");
+@font-face {
+  font-family: "Campton";
+  font-weight: "600";
+  src: url("../assets/fonts/campton-semibold.eot");
+  src: url("../assets/fonts/campton-semibold.woff") format("woff"), url("../assets/fonts/campton-semibold.woff2") format("woff2"), url("../assets/fonts/campton-semibold.ttf") format("opentype");
+}
+
 article, aside, details, figcaption, figure, footer, header, hgroup, nav, section, summary {
   display: block;
 }
@@ -188,13 +194,15 @@ body,
 section,
 div,
 h1,
+h2,
+h3,
 p,
-ul {
+ol {
   margin: 0;
   padding: 0;
 }
 
-OL {
+ol {
   list-style: none;
 }
 
@@ -202,13 +210,87 @@ a {
   text-decoration: none;
 }
 
+@-webkit-keyframes swing {
+  0% {
+    -webkit-transform: rotate(3deg);
+            transform: rotate(3deg);
+  }
+  100% {
+    -webkit-transform: rotate(-3deg);
+            transform: rotate(-3deg);
+  }
+}
+
+@keyframes swing {
+  0% {
+    -webkit-transform: rotate(3deg);
+            transform: rotate(3deg);
+  }
+  100% {
+    -webkit-transform: rotate(-3deg);
+            transform: rotate(-3deg);
+  }
+}
+
+@-webkit-keyframes shake {
+  10%, 90% {
+    -webkit-transform: translate3d(-1px, 0, 0);
+            transform: translate3d(-1px, 0, 0);
+  }
+  20%, 80% {
+    -webkit-transform: translate3d(2px, 0, 0);
+            transform: translate3d(2px, 0, 0);
+  }
+  30%, 50%, 70% {
+    -webkit-transform: translate3d(-4px, 0, 0);
+            transform: translate3d(-4px, 0, 0);
+  }
+  40%, 60% {
+    -webkit-transform: translate3d(4px, 0, 0);
+            transform: translate3d(4px, 0, 0);
+  }
+}
+
+@keyframes shake {
+  10%, 90% {
+    -webkit-transform: translate3d(-1px, 0, 0);
+            transform: translate3d(-1px, 0, 0);
+  }
+  20%, 80% {
+    -webkit-transform: translate3d(2px, 0, 0);
+            transform: translate3d(2px, 0, 0);
+  }
+  30%, 50%, 70% {
+    -webkit-transform: translate3d(-4px, 0, 0);
+            transform: translate3d(-4px, 0, 0);
+  }
+  40%, 60% {
+    -webkit-transform: translate3d(4px, 0, 0);
+            transform: translate3d(4px, 0, 0);
+  }
+}
+
 body {
   background: #F2F2F2;
+  font-family: 'Campton', sans-serif;
+  font-size: 2.0rem;
+}
+
+@media (max-width: 650px) {
+  body {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 1.6rem;
+  }
 }
 
 .wrapper {
-  max-width: 1080px;
-  width: 80%;
+  max-width: 1280px;
+  width: 90%;
   margin: 0 auto;
 }
 
@@ -219,7 +301,7 @@ header {
 }
 
 header h1 {
-  font-family: 'Rubik Mono One', sans-serif;
+  font-family: 'Rubik', sans-serif;
   text-transform: uppercase;
   font-size: 5.1rem;
   color: #302826;
@@ -231,104 +313,360 @@ header h1 .spacingFix {
 }
 
 header p {
-  font-family: 'Rubik', sans-serif;
-  font-weight: 500;
   font-size: 1.8rem;
   color: #DC5712;
 }
 
 main {
-  margin: 4% 0;
+  border: 3px solid green;
+  height: 100vh;
 }
 
-.gameGrid {
-  width: 500px;
+main .wrapper {
+  border: 3px solid orange;
+  height: 100%;
+  padding: 3rem 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  margin: 0 auto;
-  position: relative;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
 }
 
-.card {
-  width: calc(25% - 10px);
-  height: calc(33.333% - 10px);
-  margin: 5px;
-  position: relative;
-  -webkit-transform: rotateY(0deg) scale(1);
-          transform: rotateY(0deg) scale(1);
-  -webkit-transform-style: preserve-3d;
-          transform-style: preserve-3d;
-  -webkit-transition: -webkit-transform .5s;
-  transition: -webkit-transform .5s;
-  transition: transform .5s;
-  transition: transform .5s, -webkit-transform .5s;
-  width: 100px;
-  height: 100px;
-}
-
-.card:focus {
-  border: 1px solid red;
-}
-
-.card:active {
-  -webkit-transform: scale(0.97);
-          transform: scale(0.97);
-  -webkit-transition: -webkit-transform .2s;
-  transition: -webkit-transform .2s;
-  transition: transform .2s;
-  transition: transform .2s, -webkit-transform .2s;
-}
-
-.card.flip {
-  -webkit-transform: rotateY(180deg);
-          transform: rotateY(180deg);
-}
-
-.cardFront,
-.cardBack {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-}
-
-.cardFront {
-  -webkit-transform: rotateY(180deg);
-          transform: rotateY(180deg);
-}
-
-.cardFront img {
-  width: 100%;
-  display: block;
-  border-radius: 16%;
-}
-
-.cardBack {
-  border-radius: 16%;
-  background: black;
-  opacity: 0.8;
-}
-
-footer {
-  border: 1px solid red;
-  margin-bottom: 3%;
-}
-
-footer .wrapper {
+main .factContainer {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 1 45%;
+          flex: 0 1 45%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-right: 5%;
+  text-align: center;
+  color: #302826;
 }
 
-footer p {
+@media (max-width: 850px) {
+  main .factContainer {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 100%;
+            flex: 0 0 100%;
+    min-height: 330px;
+    margin-right: 0%;
+    margin-bottom: 5%;
+  }
+}
+
+@media (max-width: 480px) {
+  main .factContainer {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 100%;
+            flex: 0 0 100%;
+    min-height: auto;
+    height: 250px;
+  }
+}
+
+main .factContainer.background {
+  background: #e5e5e5;
+}
+
+main .factContainer .breedName {
   font-family: 'Rubik', sans-serif;
-  font-weight: 500;
-  font-size: 1.6rem;
+  font-size: calc(2rem + (48 - 20) * (100vw - 320px) / (1280 - 320));
   color: #DC5712;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 380px) {
+  main .factContainer .breedName {
+    margin-bottom: 0.5rem;
+  }
+}
+
+main .factContainer .introCard {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+main .factContainer p.instructions {
+  font-size: 2.8rem;
+  max-width: 400px;
+  margin: 0 5%;
+  color: #DC5712;
+}
+
+@media (max-width: 480px) {
+  main .factContainer p.instructions {
+    font-size: 2rem;
+  }
+}
+
+main .factContainer .factCard {
+  border-radius: 30px;
+  width: 100%;
+  height: 100%;
+  padding: 5%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: #e0e0e0;
+}
+
+@media (max-width: 850px) {
+  main .factContainer .factCard {
+    padding: 3%;
+  }
+}
+
+@media (max-width: 650px) {
+  main .factContainer .factCard {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+}
+
+@media (max-width: 850px) {
+  main .factContainer .factBreedInfo {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 45%;
+            flex: 0 0 45%;
+  }
+}
+
+@media (max-width: 650px) {
+  main .factContainer .factBreedInfo {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 100%;
+            flex: 0 0 100%;
+    margin-bottom: 3%;
+  }
+}
+
+@media (max-width: 380px) {
+  main .factContainer .factBreedInfo span {
+    display: none;
+  }
+}
+
+main .factContainer .factImg {
+  -ms-flex-preferred-size: 100%;
+      flex-basis: 100%;
+}
+
+@media (max-width: 850px) {
+  main .factContainer .factImg {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 50%;
+            flex: 0 0 50%;
+    -webkit-box-ordinal-group: 0;
+        -ms-flex-order: -1;
+            order: -1;
+  }
+}
+
+@media (max-width: 650px) {
+  main .factContainer .factImg {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 100%;
+            flex: 0 0 100%;
+    margin: -3% auto 1%;
+    -webkit-box-ordinal-group: 1;
+        -ms-flex-order: 0;
+            order: 0;
+  }
+}
+
+main .factContainer .factImg img {
+  margin: 0 auto;
+  max-width: 90%;
+  display: block;
+}
+
+@media (max-width: 850px) {
+  main .factContainer .factImg img {
+    max-width: 100%;
+    margin-left: -5%;
+  }
+}
+
+@media (max-width: 650px) {
+  main .factContainer .factImg img {
+    max-width: 60%;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 480px) {
+  main .factContainer .factImg img {
+    max-width: 60%;
+    margin: -0.5rem auto 0;
+  }
+}
+
+main .gameArea {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 50%;
+          flex: 0 0 50%;
+}
+
+@media (max-width: 850px) {
+  main .gameArea {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 70%;
+            flex: 0 0 70%;
+  }
+}
+
+@media (max-width: 600px) {
+  main .gameArea {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 90%;
+            flex: 0 0 90%;
+  }
+}
+
+main .attemptCount {
+  text-align: right;
+  color: #E9594E;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 600px) {
+  main .attemptCount {
+    text-align: center;
+    font-size: 1.8rem;
+  }
+}
+
+main .gameGrid {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: (1fr)[4];
+      grid-template-rows: repeat(4, 1fr);
+  -ms-grid-columns: (1fr)[4];
+      grid-template-columns: repeat(4, 1fr);
+  grid-gap: 2%;
+  height: 44.478vw;
+  max-height: 638px;
+  -webkit-perspective: 600px;
+          perspective: 600px;
+}
+
+@media (max-width: 850px) {
+  main .gameGrid {
+    height: 60vw;
+  }
+}
+
+@media (max-width: 600px) {
+  main .gameGrid {
+    height: 78.422vw;
+  }
+}
+
+main .card {
+  border-radius: 16%;
+  position: relative;
+  cursor: pointer;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  background: #43ABE0;
+  -webkit-transition: background 0.3s, -webkit-transform 0.5s;
+  transition: background 0.3s, -webkit-transform 0.5s;
+  transition: transform 0.5s, background 0.3s;
+  transition: transform 0.5s, background 0.3s, -webkit-transform 0.5s;
+}
+
+main .card:hover, main .card:focus {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+  background: #2294ce;
+}
+
+main .card:active {
+  -webkit-transform: scale(0.9);
+          transform: scale(0.9);
+}
+
+main .card.flip {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}
+
+main .card.corgi .cardFront, main .card.schnauzer .cardFront {
+  background-color: #43ABE0;
+}
+
+main .card.poodle .cardFront, main .card.frenchie .cardFront {
+  background-color: #E9594E;
+}
+
+main .card.beagle .cardFront, main .card.rottweiler .cardFront {
+  background-color: #96BF3E;
+}
+
+main .card.retriever .cardFront, main .card.samoyed .cardFront {
+  background-color: #542361;
+}
+
+main .cardFront,
+main .cardBack {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+main .cardFront img,
+main .cardBack img {
+  width: 100%;
+  display: block;
+}
+
+main .cardFront {
+  -webkit-transform: rotateY(-180deg);
+          transform: rotateY(-180deg);
+  border-radius: 16%;
+}
+
+main .cardFront img.swing {
+  -webkit-animation: swing ease-in-out 0.5s infinite alternate;
+          animation: swing ease-in-out 0.5s infinite alternate;
+}
+
+main .cardBack {
+  border-radius: 16%;
+  -webkit-transform: rotateY(0);
+          transform: rotateY(0);
 }
 /*# sourceMappingURL=styles.css.map */
