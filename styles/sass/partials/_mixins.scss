@@ -1,6 +1,6 @@
-$background: #F2F2F2;
-$grey: #D3D3D3;
-$charcoal-brown: #302826;
+// GLOBAL COLORS
+$offWhite: #F2F2F2;
+$charcoalBrown: #302826;
 $orange: #DC5712;
 $blue: #43ABE0;
 $green: #96BF3E;
@@ -8,9 +8,23 @@ $red: #E9594E;
 $purple: #542361;
 
 // MIXINS
-
 @mixin wrapper($max-width, $width, $margin: 0 auto) {
   max-width: $max-width;
   width: $width;
   margin: $margin;
+}
+
+@mixin flexCenter($wrap: nowrap, $justify-content: center, $align-items: center) {
+  display: flex;
+  flex-wrap: $wrap;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+@mixin posAbsFullScreen {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }

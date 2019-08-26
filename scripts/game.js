@@ -7,10 +7,8 @@ game = {
   attemptedGuesses: 0,
   dogFacts: {
     corgi: [
-      `Corgi means dwarf dog in welsh and were originally used as herders`,
-      `A Pembroke Welsh Corgi named Rufus was the mascot for Amazon.`
-
-      // `A Pembroke Welsh Corgi named Rufus was the mascot for Amazon. <span>In the early days of Amazon.com, a Pembroke named Rufus belonged to the principal engineer and came with them to work every day. Known for walking the halls, attending meetings, and snoozing, Rufus became the unofficial Amazon mascot.</span>`
+      `Corgi means "dwarf dog" in Welsh and was originally a cattle herding dog breed which originated in Pembrokeshire, Wales.`,
+      `The unofficial mascot of Amazon.com is a Pembroke corgi named Rufus, who became a central character of Amazon's "404" error page.`
     ],
     beagle: [
       `Beagle means "Loudmouth" in French, as they are known for being very vocal, with barking, baying and howling.`,
@@ -18,11 +16,11 @@ game = {
     ],
     frenchie: [
       `Frenchies can't swim due to their smushed faces, thick neck structures and short bodies. <span>They need to use great amounts of energy just to keep their heads above the water.</span>`,
-      `Frenchies aren’t not great on planes because their smushy face makes them prone to breathing problems which could their airways to collapse.`
+      `Frenchies aren’t not great on planes because their smushed face makes them prone to breathing problems which could their airways to collapse.`
     ],
     schnauzer: [
-      `Schnauzer comes from the German word for muzzle, referring to the dog’s square snout and distinct facial hair.`,
-      `Schnauzers are great all-around farm dogs and ratters which makes them fearless, but not aggressive.`
+      `Schnauzer comes from the German word for muzzle, which refers to the dog’s square snout and distinct facial hair.`,
+      `Schnauzers are great all-around farm dogs and ratters, which makes them fearless but not aggressive.`
     ],
     retriever: [
       `Golden Retrievers are considered to be the 4th smartest dog breed (in line behind Border Collies, Poodles, and German Shepherds).`,
@@ -34,7 +32,7 @@ game = {
       `Dubbed the “Sammy smile,” Samoyeds have lips that naturally curve upwards and always wear a happy expression.`
     ],
     poodle: [
-      `Despite their French reputation, poodles hail from Germany, where they were called pudel, which is German for “puddle.`,
+      `Despite their French reputation, Poodles hail from Germany, where they were called pudel, which is German for “puddle.`,
       `Unlike dogs that shed, the poodle will grow fur continuously. If left ungroomed, their fur will become matted and dreadlock-like.`
     ],
     rottweiler: [
@@ -44,22 +42,32 @@ game = {
   },
 
   // METHODS START HERE
-
   renderGame() {
     $('#gameArea').removeClass('fadeOutEl');
-    // Setting up winning message
+
+    // Activate functionality of 'Play Now' button on home screen
+    $('#playNow').on('click keypress', () => {
+      $('#playNow').addClass('pressDown');
+      setTimeout(() => {
+        $('#playNow').removeClass('pressDown');
+        setTimeout(() => {
+          $('header').addClass('slideUp');
+        }, 500);
+      }, 300);
+    });
+
+    // Set up winning message
     const winningMessageContainer = `<div class="winningMessageContainer" id="winningMessageContainer">
     <div class="winningMessage" id="winningMessage">
     <p>Congrats!</p>
     <p>You've matched all the doggos!</p>
-    <button class="playAgain" id="playAgain">Play again</button>
+    <button class="playAgain" id="playAgain" tabindex="0">Play again</button>
     </div>
     <div class="winningCardOverlay" id="winningCardOverlay"></div>
     </div>`;
-
     $('#gameGrid').append(winningMessageContainer);
 
-    // Setting up dog cards
+    // Set up dog memory cards
     game.dogsLeftToMatch = [...game.dogs];
     const doubleDogs = [...game.dogs].concat([...game.dogs]);
     this.shuffleArray(doubleDogs);
@@ -68,9 +76,7 @@ game = {
       const capitalizedDogBreed = `${dog.charAt(0).toUpperCase()}${dog.substring(1)}`;
 
       const cardHTML = `<li class="card ${dog}" tabindex="0" data-breed="${dog}">
-      
       <div class="cardFront"><img src="assets/img/dogHead/dogCard${capitalizedDogBreed}.svg" alt="${dog}"></div>
-
       <div class="cardBack"><img src="assets/img/cardBackPawprint.svg" alt="pawprint"</div>
       </li>`;
 
@@ -115,15 +121,17 @@ game = {
       game.showMatchedBreedFact();
       game.clearSavedCardsData();
       game.unlockGameBoard();
-      return
+      return;
     }
 
     setTimeout(function () {
       game.card1.removeClass('flip');
       game.card2.removeClass('flip');
-      game.clearSavedCardsData();
-      game.unlockGameBoard();;
-    }, 1500); // let user look at non-matching card pair for 1500ms
+      setTimeout(() => {
+        game.clearSavedCardsData();
+        game.unlockGameBoard();
+      }, 300);
+    }, 1200); // let user look at non-matching card pair for 1500ms
   },
   removeMatchedBreedFromList() {
     game.matchedBreed = game.card1.data('breed');
@@ -131,17 +139,16 @@ game = {
     const breedIndex = game.dogsLeftToMatch.indexOf(game.matchedBreed);
     if (breedIndex > -1) { game.dogsLeftToMatch.splice(breedIndex, 1); }
 
-    console.log(game.dogsLeftToMatch);
-
     if (game.dogsLeftToMatch.length === 0) {
-      $('#playAgain').click(function () {
+
+      $('#playAgain').on('click keypress', function () {
         $(this).addClass('pressDown');
 
         setTimeout(() => {
           $(this).removeClass('pressDown');
           game.resetGame();
         }, 300);
-      })
+      });
 
       setTimeout(() => {
         $('#winningMessageContainer').css('visibility', 'visible');
@@ -158,7 +165,7 @@ game = {
 
     const capitalizedDogBreed = `${game.matchedBreed.charAt(0).toUpperCase()}${game.matchedBreed.substring(1)}`;
 
-    const factText = `<div class="factBreedInfo"><h3 class="breedName" id="breedName">${game.matchedBreed}</h3><p class="breedFact">${randomFact}</p></div>`;
+    const factText = `<div class="factInfo"><h3 class="breedName" id="breedName">${game.matchedBreed}</h3><p class="breedFact">${randomFact}</p></div>`;
     const factImage = `<div class="factImg" id="factImg"><img src="assets/img/fullDog/fullDog${capitalizedDogBreed}.svg" alt="Illustration of ${game.matchedBreed}"/></div>`;
 
     const factCard = $('<div class="factCard"></div>');
@@ -192,9 +199,7 @@ game = {
     game.attemptedGuesses = 0;
 
     $('#gameArea').addClass('fadeOutEl');
-    // $('#gameGrid').addClass('fadeOutEl');
     $('#gameGrid').html('');
-
     $('#factContainer').addClass('fadeOutEl');
 
     setTimeout(() => {
@@ -205,30 +210,81 @@ game = {
       game.renderGame();
       game.unlockGameBoard();
     }, 1000);
-
   },
-  // INIT METHOD
+  konami() {
+    // Taken from https://codepen.io/kmaida/pen/oCkpt?editors=1010
+    let konamikeys = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65],
+      started = false,
+      count = 0;
+
+    $('body').keydown(function (e) {
+      let reset = function () {
+        started = false;
+        count = 0;
+        return;
+      };
+
+      key = e.keyCode;
+
+      // Begin watching if first key in sequence was pressed.
+      if (!started) {
+        if (key == 38) {
+          started = true;
+        }
+      }
+
+      // If we've started, pay attention to key presses, looking for right sequence.
+      if (started) {
+        if (konamikeys[count] == key) {
+          count++;
+        } else {
+          // Incorrect key, restart.
+          reset();
+        }
+        if (count == 10) {
+          // Success!
+          $('.cardFront').css('backface-visibility', 'visible');
+          $('.cardBack').css('display', 'none');
+          reset();
+        }
+      } else {
+        reset();
+      }
+    });
+  },
+  checkScreenWidth() {
+    if ($('header').width() < 480) {
+      $('.homeImg').attr('src', 'assets/img/homeDog/homeDogsMobile.svg');
+      $('.homeImg').attr('alt', 'Illustrations of four different dog breeds (from left to right) - Rottweiler, Samoyed, Beagle and Frenchie.');
+    } else if ($('header').width() < 940) {
+      $('.homeImg').attr('src', 'assets/img/homeDog/homeDogsTablet.svg');
+      $('.homeImg').attr('alt', 'Illustrations of six different dog breeds (from left to right) - Rottweiler, Samoyed, Beagle, Corgi, Frenchie and Schnauzer.');
+    }
+
+    $(window).resize(function () {
+      if ($('header').width() < 480) {
+        $('.homeImg').attr('src', 'assets/img/homeDog/homeDogsMobile.svg');
+        $('.homeImg').attr('alt', 'Illustrations of four different dog breeds (from left to right) - Rottweiler, Samoyed, Beagle and Frenchie.');
+      } else if ($('header').width() < 940) {
+        $('.homeImg').attr('src', 'assets/img/homeDog/homeDogsTablet.svg');
+        $('.homeImg').attr('alt', 'Illustrations of six different dog breeds (from left to right) - Rottweiler, Samoyed, Beagle, Corgi, Frenchie and Schnauzer.');
+      } else if ($('header').width() > 940) {
+        $('.homeImg').attr('src', 'assets/img/homeDog/homeDogsDesktop.svg');
+        $('.homeImg').attr('alt', 'Illustrations of eight different dog breeds (from left to right) - Rottweiler, Samoyed, Retriever, Poodle, Beagle, Corgi, Frenchie and Schnauzer.');
+      }
+    });
+  },
+  // INIT
   init() {
+    game.checkScreenWidth();
+    game.konami();
     game.renderGame();
     game.unlockGameBoard();
-
-    $('#playNow').click(() => {
-      $('#playNow').addClass('pressDown');
-      setTimeout(() => {
-        $('#playNow').removeClass('pressDown');
-        setTimeout(() => {
-          $('header').addClass('shift');
-        }, 500);
-      }, 300);
-    });
   }
 }
-
 
 // DOCUMENT READY STARTS HERE
 $(document).ready(function () {
   game.init();
   // DOCUMENT READY ENDS HERE
 });
-
-

@@ -1,0 +1,137 @@
+header {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background: $blue;
+  transition: all 2s;
+
+  &.slideUp {
+    top: -100vh;
+  }
+  
+  .wrapper {
+    position: relative;
+    height: 100%;
+  }
+
+  .credits {
+    position: absolute;
+    width: 100%;
+    right: 0;
+    margin-top: 3rem;
+    font-size: 1.6rem;
+    text-align: right;
+    color: darken($blue, 30%);
+
+    @media(max-width: 768px) {
+      text-align: center;
+      margin: 3rem auto 0;
+    }
+
+    a {
+      color: darken($blue, 40%);
+      transition: color 0.2s;
+      &:hover {
+        color: lighten($blue, 30%)
+      }
+    }
+  }
+
+  .homeText {
+    font-family: 'Rubik', sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 2px;
+    width: 100%;
+    height: 100%;
+    @include flexCenter($wrap: wrap, $align-items: null);
+    align-content: center;
+  }
+
+  h1.gameTitle {
+    flex: 0 0 100%;
+    font-size: 10rem;
+    line-height: 1;
+    color: $offWhite;
+    text-shadow: 7px 7px 0 darken($blue, 20%);
+    margin-bottom: 4rem;
+    opacity: 0;
+    animation-duration: 1s;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
+
+    @media (max-width: 1280px) {
+      font-size: calc(4.8rem + (100 - 48) * (100vw - 320px) / (1280 - 320));
+    }
+
+    @media (max-width: 480px) {
+      text-shadow: 5px 5px 0 darken($blue, 20%);
+    }
+
+    span {
+      display: block;
+    }
+  }
+
+  .playNowButtonContainer {
+    width: 100%;
+    animation-duration: 0.5s;
+    animation-delay: 2s;
+  }
+
+  button.playNow {
+    position: relative;
+    font-size: 4.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: lighten($orange, 7%);
+    background: $offWhite;
+    margin-bottom: 8%;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    top: 0;
+    box-shadow: 0px 10px 0px darken($blue, 20%);
+    transition: all 0.2s;
+    transform: scale(1);
+
+    @media (max-width: 1280px) {
+      font-size: calc(2.4rem + (48 - 24) * (100vw - 320px) / (1280 - 320));
+    }
+
+    @media (max-width: 480px) {
+      border-radius: 5px;
+      box-shadow: 0px 6px 0px darken($blue, 20%);
+
+      &.pressDown {
+        box-shadow: 0px 2px 0px darken($green, 20%);
+      }
+    }
+
+    &:hover,
+    &:focus {
+      background: $green;
+      color: $offWhite;
+      transform: scale(1.1);
+    }
+
+    &.pressDown {
+      top: 5px;
+      box-shadow: 0px 4px 0px darken($green, 20%);
+    }
+  }
+
+  .homeImgContainer {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    animation-duration: 1s;
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+  } 
+}

@@ -1,0 +1,396 @@
+main {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  transition: left 1s;
+  
+  .wrapper {
+    height: 100%;
+    padding: 3rem 0;
+    @include flexCenter($wrap: wrap);
+
+    @media (max-width: 480px) {
+      padding: 1rem 0;
+    }
+  }
+
+  .factContainer {
+    flex: 0 1 45%;
+    @include flexCenter;
+    margin-right: 5%;
+    text-align: center;
+    color: $charcoalBrown;
+    opacity: 1;
+    transition: opacity 0.5s;
+
+    &.fadeOutEl {
+      opacity: 0;
+    }
+
+    &.background {
+      background: darken($offWhite, 5%);
+    }
+
+    @media (max-width: 850px) {
+      flex: 0 0 100%;
+      margin-right: 0%;
+      margin-bottom: 5%;
+    }
+
+    @media (max-width: 480px) {
+      flex: 0 0 100%;
+      min-height: auto;
+      margin-bottom: 1rem;
+    }
+  }
+
+  .introCard {
+    @include flexCenter;
+    width: 100%;
+    height: 100%;
+    min-height: 200px;
+
+    p.instructions {
+      font-size: 3.2rem;
+      max-width: 400px;
+      margin: 0 5%;
+      color: $orange;
+
+      @media (max-width: 850px) {
+        font-size: 2.8rem;
+      }
+
+      @media (max-width: 480px) {
+        font-size: 2rem;
+      }
+    }
+  }
+
+  .factCard {
+    border-radius: 30px;
+    width: 100%;
+    height: 100%;
+    padding: 5%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    background: darken($offWhite, 7%);
+
+    @media (max-width: 850px) {
+      padding: 3%;
+    }
+    @media (max-width: 650px) {
+      justify-content: center;
+      border-radius: 10px;
+      padding: 5%;
+    }
+  }
+
+  .factInfo {
+    @media (max-width: 850px) {
+      flex: 0 0 50%;
+    }
+    @media (max-width: 650px) {
+      flex: 0 0 100%;
+      margin-bottom: 3%;
+    }
+    @media (max-width: 380px) {
+      span {
+        display: none;
+      }
+    }
+
+    h3.breedName {
+      font-family: 'Rubik', sans-serif;
+      font-size: 4.8rem;
+      color: $orange;
+      text-transform: uppercase;
+
+      @media (max-width: 1280px) {
+        font-size: calc(2rem + (48 - 20) * (100vw - 320px) / (1280 - 320));
+      }
+      @media (max-width: 380px) {
+        margin-bottom: 0.5rem;
+      }
+    }  
+    
+    p.breedFact {
+      margin: 2rem 0;
+
+      @media (max-width: 1080px) {
+        font-size: 2rem;
+      }
+      @media (max-width: 650px) {
+        font-size: 1.6rem;
+        margin: 1rem 0;
+      }
+    }
+  }
+  .factImg {
+    flex: 0 0 100%;
+
+    @media (max-width: 850px) {
+        flex: 0 0 50%;
+        order: -1;
+        margin-left: -5%;
+      }
+      @media (max-width: 650px) {
+        flex: 0 0 100%;
+        order: 0;
+        max-width: 60%;
+        margin: 0 auto;
+      }
+      @media (max-width: 400px) {
+        max-width: 40%;
+      } 
+
+    img {
+      margin: 0 auto;
+      width: 100%;
+      display: block;
+    }
+  } // FACT SECTION STYLES END
+
+  // GAME SECTION STYLES START
+  .gameArea {
+    flex: 0 0 50%;
+
+    &.fadeOutEl {
+      opacity: 0;
+    }
+
+    @media (max-width: 850px) {
+      flex: 0 0 70%;
+    }
+    @media (max-width: 600px) {
+      flex: 0 0 90%;
+    }
+  }
+
+  .attemptCount {
+    text-align: right;
+    color: $red;
+    margin-bottom: 2rem;
+    @media (max-width: 850px) {
+      text-align: center;
+    }
+    @media (max-width: 480px) {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  .gameGrid {
+    display: grid;
+    grid-template-rows: (repeat(4, 1fr));
+    grid-template-columns: (repeat(4, 1fr));
+    grid-gap: 2%;
+    position: relative;
+    height: 44.478vw;
+    max-height: 638px;
+    perspective: 600px;
+    opacity: 1;
+    transition: opacity 0.5s;
+
+    &.fadeOutEl {
+      opacity: 0;
+    }
+
+    @media (max-width: 850px) {
+      height: 60vw;
+    }
+    @media (max-width: 600px) {
+      height: 78.422vw;
+    }
+  }
+
+  .card {
+    border-radius: 16%;    
+    position: relative;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transform: scale(1);
+    background: lighten($blue, 5%);
+    transition: transform 0.5s, background 0.3s;
+    
+    &:hover,
+    &:focus {
+      transform: scale(1.05);
+      background: darken($blue, 10%);
+    }
+
+    &:active {
+      transform: scale(0.9);
+    }
+
+    &.flip {
+      transform: rotateY(180deg);
+    }
+
+    &.corgi,
+    &.schnauzer {
+      .cardFront {
+        background-color: $blue;
+      }
+    }
+
+    &.poodle,
+    &.frenchie {
+      .cardFront {
+        background-color: $red;
+      }
+    }
+
+    &.beagle,
+    &.rottweiler {
+      .cardFront {
+        background-color: $green;
+      }
+    }
+
+    &.retriever,
+    &.samoyed {
+      .cardFront {
+        background-color: $purple;
+      }
+    }
+  }
+
+  .cardFront, 
+  .cardBack {
+    @include posAbsFullScreen;
+    backface-visibility: hidden;
+
+    img {
+      width: 100%;
+      display: block;
+    }
+  }
+
+  .cardFront {
+    transform: rotateY(-180deg);
+    
+    border-radius: 16%;
+
+    img.swing {
+      animation: swing ease-in-out 0.5s infinite alternate;
+    }
+  }
+
+  .cardBack {
+    border-radius: 16%;
+    transform: rotateY(0);
+  } // GAME SECTION STYLES END
+
+  // WINNING MESSAGE STYLES START
+  .winningMessageContainer {
+    visibility: hidden;
+    @include posAbsFullScreen;
+    z-index: 10;
+    @include flexCenter;
+  }
+
+  .winningMessage {
+    position: relative;
+    z-index: 10;
+    border-radius: 10px;
+    margin-top: -5%;
+    padding: 8% 3% 11%;
+    width: 80%;
+    background: $blue;
+    box-shadow: 13px 13px 0px 0px darken($blue, 20%);
+    font-family: 'Rubik', sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+
+    @media (max-width: 480px) {
+      box-shadow: 8.5px 8.5px 0px 0px darken($blue, 20%);
+    }
+    
+    &.bounceIn {
+      animation: bounceIn 1s;
+    }
+
+    p {
+      color: #fff;
+      letter-spacing: 1px;
+
+      &:first-child {
+        font-size: 6rem;
+        text-shadow: 5px 5px 0 darken($blue, 15%);
+
+        @media(max-width: 1280px) {
+          font-size: calc(2.4rem + (60 - 28) * (100vw - 320px) / (1280 - 320));
+        }
+
+        @media(max-width: 480px) {
+          text-shadow: 3px 3px 0 darken($blue, 15%);
+        }
+      }
+
+      &:nth-child(2) {
+        font-size: 3.6rem;
+        margin: 4% auto 6.5%;
+        width: 80%;
+
+        @media(max-width: 1280px) {
+          font-size: calc(1.6rem + (36 - 16) * (100vw - 320px) / (1280 - 320));
+        }
+      }
+    }
+
+    button.playAgain {
+      position: relative;
+      top: 0;
+      background: $green;
+      padding: 3% 5%;
+      font-size: 3.6rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: $purple;
+      border-radius: 10px;
+      box-shadow: 0px 10px 0px darken($green, 20%);
+      transition: all 0.2s;
+      transform: scale(1);
+      
+      @media (max-width: 1280px) {
+        font-size: calc(1.6rem + (36 - 16) * (100vw - 320px) / (1280 - 320));
+      }
+
+      @media (max-width: 480px) {
+        border-radius: 5px;
+        box-shadow: 0px 6px 0px darken($green, 20%);
+        
+        &.pressDown {
+          box-shadow: 0px 2px 0px darken($purple, 20%);
+        }
+      }
+
+      &:hover,
+      &:focus {
+        background: $purple;
+        box-shadow: 0px 2px 0px darken($purple, 20%);
+        color: $offWhite;
+        transform: scale(1.1);
+      }
+
+      &.pressDown {
+        top: 5px;
+        box-shadow: 0px 4px 0px darken($purple, 20%);
+      }
+    }
+  }
+
+  .winningCardOverlay {
+    @include posAbsFullScreen;
+    z-index: 5;
+    background: $offWhite;
+    opacity: 0;
+    transition: opacity 0.5s;
+    
+    &.overlayFadeIn {
+      opacity: 0.65;
+    }
+  } // WINNING MESSAGE STYLES END
+}

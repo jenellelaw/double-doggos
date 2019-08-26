@@ -5,30 +5,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
   <link href="https://fonts.googleapis.com/css?family=Rubik:900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles/styles.css">
+  <link rel="stylesheet" href="styles/styles.css">
   <title>Double Doggos | Matching Card Game</title>
 </head>
 
 <body>
-
   <header>
     <div class="wrapper">
-      <div class="homeText" id="homeText">
-        <h1 class="gameTitle">Double <span>Doggos</span></h1>
-        <button class="playNow" id="playNow">Play now</button>
+      <div class="credits" id="credits">
+        <p>Illustration credits to <a
+            href="https://www.gettyimages.ca/search/photographer?family=creative&photographer=hakule">hakule</a></p>
+        <p>Game idea inspired by <a href="https://deltatango3.github.io/davidTran_project3/">David Tran</a></p>
       </div>
 
-      <div class="dogImages">
-        <img class="rottweiler" src="assets/img/homeDog/homeDogRottweiler.svg" alt="Illustration of Rottweiler">
-        <img class="samoyed" src="assets/img/homeDog/homeDogSamoyed.svg" alt="Illustration of Samoyed">
-        <img class="retriever" src="assets/img/homeDog/homeDogRetriever.svg" alt="Illustration of Golden Retriever">
-        <img class="poodle" src="assets/img/homeDog/homeDogPoodle.svg" alt="Illustration of Poodle">
-        <img class="beagle" src="assets/img/homeDog/homeDogBeagle.svg" alt="Illustration of Beagle">
-        <img class="corgi" src="assets/img/homeDog/homeDogCorgi.svg" alt="Illustration of Corgi">
-        <img class="frenchie" src="assets/img/homeDog/homeDogFrenchie.svg" alt="Illustration of Frenchie">
-        <img class="schnauzer" src="assets/img/homeDog/homeDogSchnauzer.svg" alt="Illustration of Schnauzer">
+      <div class="homeText" id="homeText">
+        <h1 class="gameTitle animated bounceIn">Double <span>Doggos</span></h1>
+        <div class="playNowButtonContainer animated fadeInDown">
+          <button class="playNow" id="playNow" tabindex="0">Play now</button>
+        </div>
+      </div>
+
+      <div class="homeImgContainer animated slideInUp">
+        <img class="homeImg" src="assets/img/homeDog/homeDogsDesktop.svg"
+          alt="Illustrations of eight different dog breeds (from left to right) - Rottweiler, Samoyed, Retriever, Poodle, Beagle, Corgi, Frenchie and Schnauzer.">
       </div>
     </div>
   </header>
@@ -42,29 +43,13 @@
 
       <section class="gameArea" id="gameArea">
         <p class="attemptCount" id="attemptCount"></p>
-        <ol class="gameGrid" id="gameGrid">
-          <!-- <div class="winningMessageContainer" id="winningMessageContainer">
-            <div class="winningMessage" id="winningMessage">
-              <p>Congrats!</p>
-              <p>You've matched all the doggos!</p>
-              <button class="playAgain" id="playAgain">Play again</button>
-            </div>
-          </div> -->
-        </ol>
+        <ol class="gameGrid" id="gameGrid"></ol>
       </section>
     </div>
   </main>
 
-  <!-- <footer>
-    <div class="wrapper">
-      <p>Illustration credits to <a
-          href="https://www.gettyimages.ca/search/photographer?family=creative&photographer=hakule">hakule</a> from <a
-          href="https://www.gettyimages.com">Getty Images</a></p>
-    </div>
-  </footer> -->
-
   <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
-  <script src="/scripts/game.js"></script>
+  <script src="scripts/game.js"></script>
 </body>
 
 </html>
