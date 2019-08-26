@@ -1038,8 +1038,8 @@ main .winningMessage button.playAgain {
 
 main .winningMessage button.playAgain:hover, main .winningMessage button.playAgain:focus {
   background: #542361;
-  -webkit-box-shadow: 0px 2px 0px #130816;
-          box-shadow: 0px 2px 0px #130816;
+  -webkit-box-shadow: 0px 10px 0px #130816;
+          box-shadow: 0px 10px 0px #130816;
   color: #F2F2F2;
   -webkit-transform: scale(1.1);
           transform: scale(1.1);

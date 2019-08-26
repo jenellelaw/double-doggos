@@ -154,7 +154,7 @@ game = {
         $('#winningMessageContainer').css('visibility', 'visible');
         $('#winningCardOverlay').addClass('overlayFadeIn');
         $('#winningMessage').addClass('bounceIn');
-      }, 2000);
+      }, 1000);
     }
   },
   showMatchedBreedFact() {

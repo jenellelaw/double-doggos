@@ -370,7 +370,7 @@ main {
       &:hover,
       &:focus {
         background: $purple;
-        box-shadow: 0px 2px 0px darken($purple, 20%);
+        box-shadow: 0px 10px 0px darken($purple, 20%);
         color: $offWhite;
         transform: scale(1.1);
       }
