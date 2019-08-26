@@ -192,7 +192,6 @@ game = {
     });
   },
   resetGame() {
-    game.renderGame();
     game.card1 = '';
     game.card2 = '';
     game.matchedBreed = '';
